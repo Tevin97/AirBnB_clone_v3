@@ -2,6 +2,7 @@
 """
 This module Creates a route `/status` on the object app_views
 """
+
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
@@ -24,6 +25,7 @@ def status():
     Returns:
         A JSON response with the status "OK"
     """
+
     status = {"status": "OK"}
     return jsonify(status)
 
@@ -35,6 +37,7 @@ def stats():
     Returns:
         A JSON response with the count of objects per class
     """
+
     stats = OrderedDict()
     for key in sorted(class_plurals.keys()):
         count = storage.count(class_plurals[key])
