@@ -23,12 +23,13 @@ def teardown_appcontext(self):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    """404 error handler
+    """
+    This function is a custom error handler for 404 errors (Not Found).
 
     args:
-        error status
+        e: error status
     return:
-        json error response
+        A json error response
     """
     return make_response(jsonify({'error': 'Not found'}), 404)
 
