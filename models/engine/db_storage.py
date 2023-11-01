@@ -75,31 +75,30 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-        def get(self, cls, id):
-        '''
-        gets an object
-        Args:
-            cls (str): class name
-            id (str): object ID
-        Returns:
-            an object based on class name and its ID
-        '''
-        obj_dict = models.storage.all(cls)
-        for k, v in obj_dict.items():
-            matchstring = cls + '.' + id
-            if k == matchstring:
-                return v
+    def get(self, cls, id):
+        """ Returns specified object from database.
 
-        return None
+        Args:
+            cls (<BaseModel-derived>): class of object to return
+            id (str): uuid of object to return
+
+        Returns:
+            `BaseModel`-derived object of UUID `id` from database.
+        """
+        if cls in classes.values() and id and type(id) is str:
+            return (self.__session.query(cls).get(id))
 
     def count(self, cls=None):
-        '''
-        counts number of objects of a class (if given)
+        """ Returns count of all objects of a given type, or grand total if no
+        type given.
+
         Args:
-            cls (str): class name
+            cls (<BaseModel-derived>): class of object to return
+
         Returns:
-            number of objects in class, if no class name given
-            return total number of objects in database
-        '''
-        obj_dict = models.storage.all(cls)
-        return len(obj_dict)
+            Total count of all objects in database of type `cls`, or total of
+        all objects if no type given.
+        """
+        if cls is None:
+            return (len(self.all()))
+        return (len(self.__session.query(cls).all()))
