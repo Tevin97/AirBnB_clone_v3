@@ -19,15 +19,17 @@ class_plurals = {'amenities': Amenity, 'cities': City, 'places': Place,
 
 @app_views.route('/status', strict_slashes=False)
 def status():
-    """status of api v1"""
+    """
+    Returns a JSON status of api v1
+    """
     status = {"status": "OK"}
     return jsonify(status)
 
 
 @app_views.route('/stats', strict_slashes=False)
 def stats():
-    """ Returns itemized count of objects in storage by class
-
+    """
+    Returns itemized count of objects in storage by class
     """
     stats = OrderedDict()
     for key in sorted(class_plurals.keys()):
