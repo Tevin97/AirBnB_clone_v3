@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""make api"""
+"""
+This module contains the principal application
+"""
 from models import storage
 from os import getenv
 from api.v1.views import app_views
