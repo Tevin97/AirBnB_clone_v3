@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-creates a blueprint instance with `url_prefix` set to `/api/v1`
+A module thatcreates a blueprint instance with `url_prefix` set to `/api/v1` 
 """
 from flask import Blueprint
 
